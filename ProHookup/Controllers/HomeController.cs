@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 
 namespace ProHookup.Controllers
 {
@@ -15,7 +11,8 @@ namespace ProHookup.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "This is where we tell you how friggin awesome ProHookup.com is, but it isn't yet. It's under construction give us two or three more sprints" +
+            ViewBag.Message =
+                "This is where we tell you how friggin awesome ProHookup.com is, but it isn't yet. It's under construction give us two or three more sprints" +
                 " so we can polish this turd.";
 
             return View();
@@ -23,7 +20,8 @@ namespace ProHookup.Controllers
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "This is our contact page, but if you call us we will bury you in a shallow grave. Seriously, just wait for version 1.2.";
+            ViewBag.Message =
+                "This is our contact page, but if you call us we will bury you in a shallow grave. Seriously, just wait for version 1.2.";
 
             return View();
         }

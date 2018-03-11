@@ -1,0 +1,9 @@
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\bin\Debug\ProFinderDB.dacpac
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\bin\Debug\ProFinderDB.dll
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\bin\Debug\ProFinderDB.pdb
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.dll
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.pdb
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\obj\Debug\Model.xml
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\obj\Debug\refactor.xml
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\obj\Debug\postdeploy.sql
+c:\users\alex\Source\Repos\ProFinderDB\ProFinderDB\obj\Debug\predeploy.sql

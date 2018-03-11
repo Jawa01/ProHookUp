@@ -1,7 +1,9 @@
 ﻿using Microsoft.Owin;
 using Owin;
+using ProHookup;
 
-[assembly: OwinStartupAttribute(typeof(ProHookup.Startup))]
+[assembly: OwinStartup(typeof(Startup))]
+
 namespace ProHookup
 {
     public partial class Startup

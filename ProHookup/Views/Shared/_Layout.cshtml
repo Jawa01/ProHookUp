@@ -17,10 +17,12 @@
             </button>
             @Html.ActionLink("ProHookup.com", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
         </div>
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-        </form>
+        @using (Html.BeginForm("Index", "Search"))
+        {
+            <form class="form-inline" method="POST">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="input" name="input">
+            </form>
+        }
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li>@Html.ActionLink("Home", "Index", "Home")</li>

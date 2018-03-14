@@ -15,8 +15,8 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "ProFinderDB"
 :setvar DefaultFilePrefix "ProFinderDB"
-:setvar DefaultDataPath "C:\Users\Alex\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
-:setvar DefaultLogPath "C:\Users\Alex\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
+:setvar DefaultDataPath "C:\Users\SoT\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
+:setvar DefaultLogPath "C:\Users\SoT\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
 
 GO
 :on error exit
@@ -37,69 +37,6 @@ IF N'$(__IsSqlCmdEnabled)' NOT LIKE N'True'
 
 GO
 USE [$(DatabaseName)];
-
-
-GO
-/*
-The column [dbo].[Professional].[State] is being dropped, data loss could occur.
-
-The column [dbo].[Professional].[StateCode] on table [dbo].[Professional] must be added, but the column has no default value and does not allow NULL values. If the table contains data, the ALTER script will not work. To avoid this issue you must either: add a default value to the column, mark it as allowing NULL values, or enable the generation of smart-defaults as a deployment option.
-*/
-
-IF EXISTS (select top 1 1 from [dbo].[Professional])
-    RAISERROR (N'Rows were detected. The schema update is terminating because data loss might occur.', 16, 127) WITH NOWAIT
-
-GO
-PRINT N'Starting rebuilding table [dbo].[Professional]...';
-
-
-GO
-BEGIN TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
-
-SET XACT_ABORT ON;
-
-CREATE TABLE [dbo].[tmp_ms_xx_Professional] (
-    [Proid]      INT           NOT NULL,
-    [FirstName]  VARCHAR (50)  NOT NULL,
-    [LastName]   VARCHAR (50)  NOT NULL,
-    [Email]      VARCHAR (50)  NOT NULL,
-    [Profession] VARCHAR (50)  NOT NULL,
-    [About]      VARCHAR (140) NULL,
-    [Phone]      VARCHAR (15)  NOT NULL,
-    [Street]     VARCHAR (50)  NOT NULL,
-    [City]       VARCHAR (50)  NOT NULL,
-    [StateCode]  VARCHAR (50)  NOT NULL,
-    [Zip]        VARCHAR (50)  NOT NULL,
-    PRIMARY KEY CLUSTERED ([Proid] ASC)
-);
-
-IF EXISTS (SELECT TOP 1 1 
-           FROM   [dbo].[Professional])
-    BEGIN
-        INSERT INTO [dbo].[tmp_ms_xx_Professional] ([Proid], [FirstName], [LastName], [Email], [Profession], [About], [Phone], [Street], [City], [Zip])
-        SELECT   [Proid],
-                 [FirstName],
-                 [LastName],
-                 [Email],
-                 [Profession],
-                 [About],
-                 [Phone],
-                 [Street],
-                 [City],
-                 [Zip]
-        FROM     [dbo].[Professional]
-        ORDER BY [Proid] ASC;
-    END
-
-DROP TABLE [dbo].[Professional];
-
-EXECUTE sp_rename N'[dbo].[tmp_ms_xx_Professional]', N'Professional';
-
-COMMIT TRANSACTION;
-
-SET TRANSACTION ISOLATION LEVEL READ COMMITTED;
 
 
 GO

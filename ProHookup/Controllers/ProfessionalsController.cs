@@ -12,7 +12,7 @@ namespace ProHookup.Controllers
 {
     public class ProfessionalsController : Controller
     {
-        private ProFinderDBEntities db = new ProFinderDBEntities();
+        private ProFinderDBEntities2 db = new ProFinderDBEntities2();
 
         // GET: Professionals
         public ActionResult Index()

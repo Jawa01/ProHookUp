@@ -12,7 +12,7 @@ namespace ProHookup.Controllers
 {
     public class CustomersController : Controller
     {
-        private ProFinderDBEntities db = new ProFinderDBEntities();
+        private ProFinderDBEntities2 db = new ProFinderDBEntities2();
 
         // GET: Customers
         public ActionResult Index()

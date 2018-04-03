@@ -1,0 +1,134 @@
+﻿@model ProHookup.Models.Professional
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<style>
+    #map {
+        height: 500px;
+        width: 100%;
+    }
+</style>
+
+<h2>Details</h2>
+<div>
+    <h4>Professional</h4>
+    <hr />
+    <div class="row">
+        <div class="col-sm">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Profession)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Profession)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.About)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.About)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Street)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Street)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.City)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.City)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.StateCode)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.StateCode)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Zip)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Zip)
+                </dd>
+            </dl>
+        </div>
+        <div class="col-sm" id="map">
+        </div>
+    </div>
+</div>
+
+<script>
+    var geocoder;
+    var map;
+    function initMap() {
+        geocoder = new window.google.maps.Geocoder();
+        var myOptions = {
+            zoom: 13,
+            mapTypeId: window.google.maps.MapTypeId.ROADMAP
+        }
+        map = new window.google.maps.Map(document.getElementById("map"), myOptions);
+        codeAddress("@ViewBag.address");
+    }
+
+    function codeAddress(address) {
+        geocoder.geocode( { 'address': address}, function(results, status) {
+            if (status === window.google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                var marker = new window.google.maps.Marker({
+                    map: map,
+                    position: results[0].geometry.location
+                });
+            }
+        });
+    }
+</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcEJQV4DGAGWn7UNxwvdSxseQSAsdo39M&callback=initMap"
+        type="text/javascript"></script>

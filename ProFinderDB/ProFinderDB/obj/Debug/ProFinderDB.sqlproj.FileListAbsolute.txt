@@ -13,3 +13,8 @@ C:\Users\SoT\Source\Repos\ProHookup\ProFinderDB\ProFinderDB\bin\Debug\ProFinderD
 C:\Users\SoT\Source\Repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.sqlprojResolveAssemblyReference.cache
 C:\Users\SoT\Source\Repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.dll
 C:\Users\SoT\Source\Repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.pdb
+C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\bin\Debug\ProFinderDB.dacpac
+C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\bin\Debug\ProFinderDB.dll
+C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\bin\Debug\ProFinderDB.pdb
+C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.dll
+C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\obj\Debug\ProFinderDB.pdb

@@ -10,5 +10,7 @@
 	[Street] VARCHAR (50) NOT NULL, 
 	[City] VARCHAR (50) NOT NULL,
 	[StateCode] VARCHAR (50) NOT NULL, 
-	[Zip] VARCHAR (50) NOT NULL
+	[Zip] VARCHAR (50) NOT NULL,
+	[Hrs] VARCHAR (50),
+	[Ranking] VARCHAR (50) 
 )

@@ -15,8 +15,8 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "ProFinderDB"
 :setvar DefaultFilePrefix "ProFinderDB"
-:setvar DefaultDataPath "C:\Users\SoT\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
-:setvar DefaultLogPath "C:\Users\SoT\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
+:setvar DefaultDataPath "C:\Users\Alex\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
+:setvar DefaultLogPath "C:\Users\Alex\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
 
 GO
 :on error exit
@@ -40,6 +40,48 @@ USE [$(DatabaseName)];
 
 
 GO
+PRINT N'Creating [dbo].[Customer]...';
+
+
+GO
+CREATE TABLE [dbo].[Customer] (
+    [Customerid] INT           NOT NULL,
+    [FirstName]  VARCHAR (50)  NOT NULL,
+    [LastName]   VARCHAR (50)  NOT NULL,
+    [Email]      VARCHAR (100) NOT NULL,
+    [Phone]      VARCHAR (15)  NOT NULL,
+    [Street]     VARCHAR (50)  NOT NULL,
+    [City]       VARCHAR (50)  NOT NULL,
+    [Statecode]  VARCHAR (2)   NOT NULL,
+    [Zip]        VARCHAR (5)   NOT NULL,
+    PRIMARY KEY CLUSTERED ([Customerid] ASC)
+);
+
+
+GO
+PRINT N'Creating [dbo].[Professional]...';
+
+
+GO
+CREATE TABLE [dbo].[Professional] (
+    [Proid]      INT           NOT NULL,
+    [FirstName]  VARCHAR (50)  NOT NULL,
+    [LastName]   VARCHAR (50)  NOT NULL,
+    [Email]      VARCHAR (50)  NOT NULL,
+    [Profession] VARCHAR (50)  NOT NULL,
+    [About]      VARCHAR (140) NULL,
+    [Phone]      VARCHAR (15)  NOT NULL,
+    [Street]     VARCHAR (50)  NOT NULL,
+    [City]       VARCHAR (50)  NOT NULL,
+    [StateCode]  VARCHAR (50)  NOT NULL,
+    [Zip]        VARCHAR (50)  NOT NULL,
+    [Hrs]        VARCHAR (50)  NULL,
+    [Ranking]    VARCHAR (50)  NULL,
+    PRIMARY KEY CLUSTERED ([Proid] ASC)
+);
+
+
+GO
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------
@@ -51,10 +93,11 @@ Post-Deployment Script Template
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
+
 	MERGE INTO Customer AS Target
 	USING (Values
-		( 1, 'Jane', 'Doe', 'janeDoe@gmail.com', '423-123-3212', '426 Grubb Rd.', 'Kingsport', 'TN', '37660'),
-		(2, 'Jimmy', 'Dahl', 'JDahl@hotmail.com', '423-321-6545', '553 Cherwin Pl', 'Johnson City', 'TN', '37654')
+		( 1, 'Jane', 'Doe', 'janeDoe@gmail.com', '423-123-3212', '426 Grubb Rd.', 'Kingsport', 'TN', '37660' ),
+		(2, 'Jimmy', 'Dahl', 'JDahl@hotmail.com', '423-321-6545', '553 Cherwin Pl', 'Johnson City', 'TN', '37589' )
 		)
 	AS SOURCE ( Customerid, FirstName, LastName, Email, Phone, Street, City, StateCode, Zip)
 	ON Target.Customerid = SOURCE.Customerid
@@ -64,14 +107,14 @@ Post-Deployment Script Template
 
 	MERGE INTO Professional AS Target
 	USING (Values
-		( 1, 'James', 'Donovan', 'JamDon@gmail.com', 'Plumber', ' I am a plumber','423-123-3212', '425 Grubb Rd.', 'Kingsport', 'TN', '37660'),
-		(2, 'Amanda', 'Hugenkis', 'topheavy@hotmail.com', 'MatchMaker',  ' I am the love nurse',  '423-987-8599', '602 Love Ln', 'Memphis ', 'TN', '37014')
+		( 1, 'James', 'Donovan', 'JamDon@gmail.com', 'Plumber', ' I am a plumber','423-123-3212', '425 Grubb Rd.', 'Kingsport', 'TN', '37660', '9am - 5pm', '7'),
+		(2, 'Amanda', 'Hugenkis', 'topheavy@hotmail.com', 'MatchMaker',  ' I am the love nurse',  '423-987-8599', '602 Love Ln', 'Memphis ', 'TN', '37014', 'By appointment only', '9' )
 		)
-	AS SOURCE ( Proid, FirstName, LastName, Email, Profession, About, Phone, Street, City, StateCode, Zip)
+	AS SOURCE ( Proid, FirstName, LastName, Email, Profession, About, Phone, Street, City, StateCode, Zip, Hrs, Ranking)
 	ON Target.Proid = SOURCE.Proid
 	WHEN NOT MATCHED BY TARGET THEN
-	INSERT (Proid, FirstName, LastName, Email,Profession, About, Phone, Street, City, StateCode, Zip)
-	VALUES (Proid, Firstname, LastName, Email, Profession, About,  Phone, Street, City, StateCode, Zip);
+	INSERT (Proid, FirstName, LastName, Email,Profession, About, Phone, Street, City, StateCode, Zip, Hrs, Ranking)
+	VALUES (Proid, Firstname, LastName, Email, Profession, About,  Phone, Street, City, StateCode, Zip, Hrs, Ranking);
 GO
 
 GO

@@ -25,5 +25,7 @@ namespace ProHookup.Models
         public string City { get; set; }
         public string StateCode { get; set; }
         public string Zip { get; set; }
+        public string Hrs { get; set; }
+        public string Ranking { get; set; }
     }
 }

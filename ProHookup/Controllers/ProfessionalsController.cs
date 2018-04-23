@@ -46,7 +46,7 @@ namespace ProHookup.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip")] Professional professional)
+        public ActionResult Create([Bind(Include = "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip,Hrs,Ranking")] Professional professional)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ProHookup.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip")] Professional professional)
+        public ActionResult Edit([Bind(Include = "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip,Hrs,Ranking")] Professional professional)
         {
             if (ModelState.IsValid)
             {

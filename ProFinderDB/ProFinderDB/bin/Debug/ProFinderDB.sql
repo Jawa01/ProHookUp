@@ -40,48 +40,6 @@ USE [$(DatabaseName)];
 
 
 GO
-PRINT N'Creating [dbo].[Customer]...';
-
-
-GO
-CREATE TABLE [dbo].[Customer] (
-    [Customerid] INT           NOT NULL,
-    [FirstName]  VARCHAR (50)  NOT NULL,
-    [LastName]   VARCHAR (50)  NOT NULL,
-    [Email]      VARCHAR (100) NOT NULL,
-    [Phone]      VARCHAR (15)  NOT NULL,
-    [Street]     VARCHAR (50)  NOT NULL,
-    [City]       VARCHAR (50)  NOT NULL,
-    [Statecode]  VARCHAR (2)   NOT NULL,
-    [Zip]        VARCHAR (5)   NOT NULL,
-    PRIMARY KEY CLUSTERED ([Customerid] ASC)
-);
-
-
-GO
-PRINT N'Creating [dbo].[Professional]...';
-
-
-GO
-CREATE TABLE [dbo].[Professional] (
-    [Proid]      INT           NOT NULL,
-    [FirstName]  VARCHAR (50)  NOT NULL,
-    [LastName]   VARCHAR (50)  NOT NULL,
-    [Email]      VARCHAR (50)  NOT NULL,
-    [Profession] VARCHAR (50)  NOT NULL,
-    [About]      VARCHAR (140) NULL,
-    [Phone]      VARCHAR (15)  NOT NULL,
-    [Street]     VARCHAR (50)  NOT NULL,
-    [City]       VARCHAR (50)  NOT NULL,
-    [StateCode]  VARCHAR (50)  NOT NULL,
-    [Zip]        VARCHAR (50)  NOT NULL,
-    [Hrs]        VARCHAR (50)  NULL,
-    [Ranking]    VARCHAR (50)  NULL,
-    PRIMARY KEY CLUSTERED ([Proid] ASC)
-);
-
-
-GO
 /*
 Post-Deployment Script Template							
 --------------------------------------------------------------------------------------

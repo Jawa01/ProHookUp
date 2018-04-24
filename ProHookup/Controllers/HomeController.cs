@@ -12,17 +12,14 @@ namespace ProHookup.Controllers
         public ActionResult About()
         {
             ViewBag.Message =
-                "This is where we tell you how friggin awesome ProHookup.com is, but it isn't yet. It's under construction give us two or three more sprints" +
-                " so we can polish this turd.";
+                "The goal of ProFinder.com is to provide a safe and reliable way for customers to find a professional to complete a desired task. " +
+                "We strive to provide the best experinece possible to not only customers but also to the professional who chose to use our services.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message =
-                "This is our contact page, but if you call us we will bury you in a shallow grave. Seriously, just wait for version 1.2.";
-
             return View();
         }
     }

@@ -6,7 +6,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    <link href="~/Content/ProFinderStyleSheet.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 <div class="navbar navbar-toggleable-md navbar-light navbar-fixed-top">
@@ -15,7 +15,7 @@
             <button type="button" class="navbar-toggler navbar-toggler-right" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            @Html.ActionLink("ProFinder.com", "Index", "Home", new {area = ""}, new {@class = "navbar-brand"})
+            @Html.ActionLink("ProFinder.com", "Index", "Home", new {area = ""}, new {@class = "navbar-brand" })
         </div>
         @using (Html.BeginForm("Index", "Search"))
         {
@@ -39,7 +39,7 @@
     @RenderBody()
     <hr/>
     <footer>
-        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        <p>ProFinder.com &copy; @DateTime.Now.Year - My ASP.NET Application</p>
     </footer>
 </div>
 

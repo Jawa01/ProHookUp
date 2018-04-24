@@ -1,0 +1,73 @@
+﻿body {
+    background-color: #FFFFFF;
+    color: #05386B;
+    font-weight: bold;
+}
+
+.jumbotron {
+    background-color: #05386B;
+}
+
+    .jumbotron h1 {
+        color: #22B14C;
+    }
+
+    .jumbotron p {
+        color: #22B14C;
+        font-weight: bold;
+    }
+
+h2 {
+    color: #22B14C;
+    font-weight: bold;
+}
+
+.buttonName{
+    color: #22B14C;
+}
+
+/* Style all font awesome icons */
+.fa {
+    padding: 20px;
+    font-size: 30px;
+    width: 50px;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Add a hover effect if you want */
+.fa:hover {
+    opacity: 0.7;
+}
+
+/* Set a specific color for each brand */
+
+/* Facebook */
+.fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+/* Twitter */
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+/* Instagram */
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+/* Google */
+.fa-google {
+    background: #dd4b39;
+    color: white;
+}
+
+/* LinkedIn*/
+.fa-linkedin {
+    background: #007bb5;
+    color: white;
+}

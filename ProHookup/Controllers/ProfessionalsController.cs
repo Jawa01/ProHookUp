@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using ProHookup.Models;
 
@@ -12,26 +8,20 @@ namespace ProHookup.Controllers
 {
     public class ProfessionalsController : Controller
     {
-        private ProFinderDBEntities2 db = new ProFinderDBEntities2();
+        private readonly ProFinderDBEntities2 _db = new ProFinderDBEntities2();
 
         // GET: Professionals
         public ActionResult Index()
         {
-            return View(db.Professionals.ToList());
+            return View(_db.Professionals.ToList());
         }
 
         // GET: Professionals/Details/5
         public ActionResult Details(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Professional professional = db.Professionals.Find(id);
-            if (professional == null)
-            {
-                return HttpNotFound();
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var professional = _db.Professionals.Find(id);
+            if (professional == null) return HttpNotFound();
             return View(professional);
         }
 
@@ -46,12 +36,14 @@ namespace ProHookup.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip,Hrs,Ranking")] Professional professional)
+        public ActionResult Create([Bind(Include =
+                "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip,Hrs,Ranking")]
+            Professional professional)
         {
             if (ModelState.IsValid)
             {
-                db.Professionals.Add(professional);
-                db.SaveChanges();
+                _db.Professionals.Add(professional);
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
@@ -61,15 +53,9 @@ namespace ProHookup.Controllers
         // GET: Professionals/Edit/5
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Professional professional = db.Professionals.Find(id);
-            if (professional == null)
-            {
-                return HttpNotFound();
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var professional = _db.Professionals.Find(id);
+            if (professional == null) return HttpNotFound();
             return View(professional);
         }
 
@@ -78,49 +64,44 @@ namespace ProHookup.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip,Hrs,Ranking")] Professional professional)
+        public ActionResult Edit([Bind(Include =
+                "Proid,FirstName,LastName,Email,Profession,About,Phone,Street,City,StateCode,Zip,Hrs,Ranking")]
+            Professional professional)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(professional).State = EntityState.Modified;
-                db.SaveChanges();
+                _db.Entry(professional).State = EntityState.Modified;
+                _db.SaveChanges();
                 return RedirectToAction("Index");
             }
+
             return View(professional);
         }
 
         // GET: Professionals/Delete/5
         public ActionResult Delete(int? id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Professional professional = db.Professionals.Find(id);
-            if (professional == null)
-            {
-                return HttpNotFound();
-            }
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            var professional = _db.Professionals.Find(id);
+            if (professional == null) return HttpNotFound();
             return View(professional);
         }
 
         // POST: Professionals/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
+        [ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Professional professional = db.Professionals.Find(id);
-            db.Professionals.Remove(professional);
-            db.SaveChanges();
+            var professional = _db.Professionals.Find(id);
+            _db.Professionals.Remove(professional);
+            _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
+            if (disposing) _db.Dispose();
             base.Dispose(disposing);
         }
     }

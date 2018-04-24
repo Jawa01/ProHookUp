@@ -23,3 +23,7 @@ C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\obj\Debug\Model.xm
 C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\obj\Debug\refactor.xml
 C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\obj\Debug\postdeploy.sql
 C:\Users\Alex\Source\Repos\ProHookup2\ProFinderDB\ProFinderDB\obj\Debug\predeploy.sql
+C:\Users\SoT\source\repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\Model.xml
+C:\Users\SoT\source\repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\refactor.xml
+C:\Users\SoT\source\repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\postdeploy.sql
+C:\Users\SoT\source\repos\ProHookup\ProFinderDB\ProFinderDB\obj\Debug\predeploy.sql

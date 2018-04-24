@@ -19,7 +19,7 @@ namespace ProHookup.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
+        private ApplicationDbContext()
             : base("DefaultConnection", false)
         {
         }

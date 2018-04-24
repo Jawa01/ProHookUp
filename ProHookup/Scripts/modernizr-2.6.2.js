@@ -49,7 +49,7 @@ window.Modernizr = (function(window, document, undefined) {
 
     var version = "2.6.2",
 
-        Modernizr = {},
+        modernizr = {},
 
         /*>>cssclasses*/
         // option for enabling the HTML classes to be added
@@ -119,9 +119,7 @@ window.Modernizr = (function(window, document, undefined) {
         // Inject element with style element and some CSS rules
         injectElementWithStyles = function(rule, callback, nodes, testnames) {
 
-            var style,
-                ret,
-                node,
+            var node,
                 docOverflow,
                 div = document.createElement("div"),
                 // After page load injecting a fake body doesn't work so check if body exists
@@ -144,7 +142,7 @@ window.Modernizr = (function(window, document, undefined) {
             // with a 'scoped' element, in our case the soft-hyphen entity as it won't mess with our measurements.
             // msdn.microsoft.com/en-us/library/ms533897%28VS.85%29.aspx
             // Documents served as xml will throw if using &shy; so use xml friendly encoded version. See issue #277
-            style = ["&#173;", '<style id="s', mod, '">', rule, "</style>"].join("");
+            var style = ["&#173;", '<style id="s', mod, '">', rule, "</style>"].join("");
             div.id = mod;
             // IE6 will false positive on some tests due to the style element inside the test div somehow interfering offsetHeight, so insert it into body or fakebody.
             // Opera will act all quirky when injecting elements in documentElement when page is served as xml, needs fakebody too. #270
@@ -160,7 +158,7 @@ window.Modernizr = (function(window, document, undefined) {
                 docElement.appendChild(fakeBody);
             }
 
-            ret = callback(div, rule);
+            var ret = callback(div, rule);
             // If this is done after page load we don't want to remove the body so check if body exists
             if (!body) {
                 fakeBody.parentNode.removeChild(fakeBody);
@@ -210,7 +208,7 @@ window.Modernizr = (function(window, document, undefined) {
         //   ...
         isEventSupported = (function() {
 
-            var TAGNAMES = {
+            var tagnames = {
                 'select': "input",
                 'change': "input",
                 'submit': "form",
@@ -222,7 +220,7 @@ window.Modernizr = (function(window, document, undefined) {
 
             function isEventSupported(eventName, element) {
 
-                element = element || document.createElement(TAGNAMES[eventName] || "div");
+                element = element || document.createElement(tagnames[eventName] || "div");
                 eventName = "on" + eventName;
 
                 // When using `setAttribute`, IE skips "unload", WebKit skips "unload" and "resize", whereas `in` "catches" those
@@ -256,12 +254,12 @@ window.Modernizr = (function(window, document, undefined) {
         // TODO :: Add flag for hasownprop ? didn't last time
 
         // hasOwnProperty shim by kangax needed for Safari 2.0 support
-        _hasOwnProperty = ({}).hasOwnProperty,
+        hasOwnProperty = ({}).hasOwnProperty,
         hasOwnProp;
 
-    if (!is(_hasOwnProperty, "undefined") && !is(_hasOwnProperty.call, "undefined")) {
+    if (!is(hasOwnProperty, "undefined") && !is(hasOwnProperty.call, "undefined")) {
         hasOwnProp = function(object, property) {
-            return _hasOwnProperty.call(object, property);
+            return hasOwnProperty.call(object, property);
         };
     } else {
         hasOwnProp =
@@ -380,7 +378,7 @@ window.Modernizr = (function(window, document, undefined) {
      * testDOMProps is a generic DOM property test; if a browser supports
      *   a certain property, it won't return undefined for it.
      */
-    function testDOMProps(props, obj, elem) {
+    function testDomProps(props, obj, elem) {
         for (var i in props) {
             var item = obj[props[i]];
             if (item !== undefined) {
@@ -420,7 +418,7 @@ window.Modernizr = (function(window, document, undefined) {
             // otherwise, they called .prefixed('requestAnimationFrame', window[, elem])
         } else {
             props = (prop + " " + (domPrefixes).join(ucProp + " ") + ucProp).split(" ");
-            return testDOMProps(props, prefixed, elem);
+            return testDomProps(props, prefixed, elem);
         }
     }
     /*>>testallprops*/
@@ -455,7 +453,7 @@ window.Modernizr = (function(window, document, undefined) {
     };
 
     tests["canvastext"] = function() {
-        return !!(Modernizr["canvas"] && is(document.createElement("canvas").getContext("2d").fillText, "function"));
+        return !!(modernizr["canvas"] && is(document.createElement("canvas").getContext("2d").fillText, "function"));
     };
 
     // webk.it/70117 is tracking a legit WebGL feature detect proposal
@@ -905,7 +903,7 @@ window.Modernizr = (function(window, document, undefined) {
         // Only input placeholder is tested while textarea's placeholder is not.
         // Currently Safari 4 and Opera 11 have support only for the input placeholder
         // Both tests are available in feature-detects/forms-placeholder.js
-        Modernizr["input"] = (function(props) {
+        modernizr["input"] = (function(props) {
             for (var i = 0, len = props.length; i < len; i++) {
                 attrs[props[i]] = !!(props[i] in inputElem);
             }
@@ -925,7 +923,7 @@ window.Modernizr = (function(window, document, undefined) {
         //   containing each input type with its corresponding true/false value
 
         // Big thanks to @miketaylr for the html5 forms expertise. miketaylr.com/
-        Modernizr["inputtypes"] = (function(props) {
+        modernizr["inputtypes"] = (function(props) {
 
             for (var i = 0, bool, inputElemType, defaultView, len = props.length; i < len; i++) {
 
@@ -992,15 +990,15 @@ window.Modernizr = (function(window, document, undefined) {
             //   then based on that boolean, define an appropriate className
             //   and push it into an array of classes we'll join later.
             featureName = feature.toLowerCase();
-            Modernizr[featureName] = tests[feature]();
+            modernizr[featureName] = tests[feature]();
 
-            classes.push((Modernizr[featureName] ? "" : "no-") + featureName);
+            classes.push((modernizr[featureName] ? "" : "no-") + featureName);
         }
     }
 
     /*>>webforms*/
     // input tests need to run.
-    Modernizr.input || webforms();
+    modernizr.input || webforms();
     /*>>webforms*/
 
 
@@ -1012,24 +1010,24 @@ window.Modernizr = (function(window, document, undefined) {
      * @param feature - String naming the feature
      * @param test - Function returning true if feature is supported, false if not
      */
-    Modernizr.addTest = function(feature, test) {
+    modernizr.addTest = function(feature, test) {
         if (typeof feature == "object") {
             for (var key in feature) {
                 if (hasOwnProp(feature, key)) {
-                    Modernizr.addTest(key, feature[key]);
+                    modernizr.addTest(key, feature[key]);
                 }
             }
         } else {
 
             feature = feature.toLowerCase();
 
-            if (Modernizr[feature] !== undefined) {
+            if (modernizr[feature] !== undefined) {
                 // we're going to quit if you're trying to overwrite an existing test
                 // if we were to allow it, we'd do this:
                 //   var re = new RegExp("\\b(no-)?" + feature + "\\b");
                 //   docElement.className = docElement.className.replace( re, '' );
                 // but, no rly, stuff 'em.
-                return Modernizr;
+                return modernizr;
             }
 
             test = typeof test == "function" ? test() : test;
@@ -1037,11 +1035,11 @@ window.Modernizr = (function(window, document, undefined) {
             if (typeof enableClasses !== "undefined" && enableClasses) {
                 docElement.className += " " + (test ? "" : "no-") + feature;
             }
-            Modernizr[feature] = test;
+            modernizr[feature] = test;
 
         }
 
-        return Modernizr; // allow chaining.
+        return modernizr; // allow chaining.
     };
 
 
@@ -1071,7 +1069,7 @@ window.Modernizr = (function(window, document, undefined) {
         var expando = "_html5shiv";
 
         /** The id for the the documents expando */
-        var expanID = 0;
+        var expanId = 0;
 
         /** Cached data for each document */
         var expandoData = {};
@@ -1126,6 +1124,8 @@ window.Modernizr = (function(window, document, undefined) {
          * @private
          * @returns {Array} An array of shived element node names.
          */
+        var html5;
+
         function getElements() {
             var elements = html5.elements;
             return typeof elements == "string" ? elements.split(" ") : elements;
@@ -1141,9 +1141,9 @@ window.Modernizr = (function(window, document, undefined) {
             var data = expandoData[ownerDocument[expando]];
             if (!data) {
                 data = {};
-                expanID++;
-                ownerDocument[expando] = expanID;
-                expandoData[expanID] = data;
+                expanId++;
+                ownerDocument[expando] = expanId;
+                expandoData[expanId] = data;
             }
             return data;
         }
@@ -1286,7 +1286,7 @@ window.Modernizr = (function(window, document, undefined) {
          * // options can be changed before the script is included
          * html5 = { 'elements': 'mark section', 'shivCSS': false, 'shivMethods': false };
          */
-        var html5 = {
+        html5 = {
 
             /**
              * An array or space separated string of node names of the elements to shiv.
@@ -1347,15 +1347,15 @@ window.Modernizr = (function(window, document, undefined) {
     /*>>shiv*/
 
     // Assign private properties to the return object with prefix
-    Modernizr._version = version;
+    modernizr._version = version;
 
     // expose these for the plugin API. Look in the source for how to join() them against your input
     /*>>prefixes*/
-    Modernizr._prefixes = prefixes;
+    modernizr._prefixes = prefixes;
     /*>>prefixes*/
     /*>>domprefixes*/
-    Modernizr._domPrefixes = domPrefixes;
-    Modernizr._cssomPrefixes = cssomPrefixes;
+    modernizr._domPrefixes = domPrefixes;
+    modernizr._cssomPrefixes = cssomPrefixes;
     /*>>domprefixes*/
 
     /*>>mq*/
@@ -1367,20 +1367,20 @@ window.Modernizr = (function(window, document, undefined) {
     //       Modernizr.mq('(min-width:0)')
     // usage:
     // Modernizr.mq('only screen and (max-width:768)')
-    Modernizr.mq = testMediaQuery;
+    modernizr.mq = testMediaQuery;
     /*>>mq*/
 
     /*>>hasevent*/
     // Modernizr.hasEvent() detects support for a given event, with an optional element to test on
     // Modernizr.hasEvent('gesturestart', elem)
-    Modernizr.hasEvent = isEventSupported;
+    modernizr.hasEvent = isEventSupported;
     /*>>hasevent*/
 
     /*>>testprop*/
     // Modernizr.testProp() investigates whether a given style property is recognized
     // Note that the property names must be provided in the camelCase variant.
     // Modernizr.testProp('pointerEvents')
-    Modernizr.testProp = function(prop) {
+    modernizr.testProp = function(prop) {
         return testProps([prop]);
     };
     /*>>testprop*/
@@ -1390,14 +1390,14 @@ window.Modernizr = (function(window, document, undefined) {
     //   or any of its vendor-prefixed variants, is recognized
     // Note that the property names must be provided in the camelCase variant.
     // Modernizr.testAllProps('boxSizing')
-    Modernizr.testAllProps = testPropsAll;
+    modernizr.testAllProps = testPropsAll;
     /*>>testallprops*/
 
 
     /*>>teststyles*/
     // Modernizr.testStyles() allows you to add custom styles to the document and test an element afterwards
     // Modernizr.testStyles('#modernizr { position:absolute }', function(elem, rule){ ... })
-    Modernizr.testStyles = injectElementWithStyles;
+    modernizr.testStyles = injectElementWithStyles;
     /*>>teststyles*/
 
 
@@ -1421,7 +1421,7 @@ window.Modernizr = (function(window, document, undefined) {
     //     },
     //     transEndEventName = transEndEventNames[ Modernizr.prefixed('transition') ];
 
-    Modernizr.prefixed = function(prop, obj, elem) {
+    modernizr.prefixed = function(prop, obj, elem) {
         if (!obj) {
             return testPropsAll(prop, "pfx");
         } else {
@@ -1440,6 +1440,6 @@ window.Modernizr = (function(window, document, undefined) {
         (enableClasses ? " js " + classes.join(" ") : "");
     /*>>cssclasses*/
 
-    return Modernizr;
+    return modernizr;
 
 })(this, this.document);

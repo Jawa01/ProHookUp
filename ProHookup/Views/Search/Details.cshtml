@@ -108,26 +108,34 @@
     var geocoder;
     var map;
     function initMap() {
+        var directionsService = new window.google.maps.DirectionsService;
+        var directionsDisplay = new window.google.maps.DirectionsRenderer;
         geocoder = new window.google.maps.Geocoder();
         var myOptions = {
             zoom: 13,
             mapTypeId: window.google.maps.MapTypeId.ROADMAP
         }
         map = new window.google.maps.Map(document.getElementById("map"), myOptions);
-        codeAddress("@ViewBag.address");
+        directionsDisplay.setMap(map);
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+
     }
 
-    function codeAddress(address) {
-        geocoder.geocode( { 'address': address}, function(results, status) {
-            if (status === window.google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                var marker = new window.google.maps.Marker({
-                    map: map,
-                    position: results[0].geometry.location
-                });
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        directionsService.route({
+            //Origin placeholder until current-session user address can be supplied
+            origin: "1276 Gilbreath Dr, Johnson City, TN",
+            destination: "@ViewBag.address",
+            travelMode: 'DRIVING'
+        }, function(response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
             }
         });
     }
+    
 </script>
 
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDcEJQV4DGAGWn7UNxwvdSxseQSAsdo39M&callback=initMap"

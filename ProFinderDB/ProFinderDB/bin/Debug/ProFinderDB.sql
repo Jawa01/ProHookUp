@@ -15,8 +15,8 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "ProFinderDB"
 :setvar DefaultFilePrefix "ProFinderDB"
-:setvar DefaultDataPath "C:\Users\Alex\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
-:setvar DefaultLogPath "C:\Users\Alex\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
+:setvar DefaultDataPath "C:\Users\SoT\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
+:setvar DefaultLogPath "C:\Users\SoT\AppData\Local\Microsoft\VisualStudio\SSDT\ProFinderDB"
 
 GO
 :on error exit
